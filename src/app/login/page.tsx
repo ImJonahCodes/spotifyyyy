@@ -47,12 +47,11 @@ export default function LoginPage() {
   return (
     <div className="flex flex-col items-center min-h-screen w-full max-w-md mx-auto px-6 py-8">
       <div className="mb-10 mt-12">
-        <Image
-          src="/spotify-logo.svg"
+        <img
+          src="/spotify.png"
           alt="Spotify"
-          width={140}
-          height={140}
-          priority
+          width={50}
+          height={50}
         />
       </div>
 
@@ -63,26 +62,32 @@ export default function LoginPage() {
       <div className="w-full space-y-4">
         <Button
           variant="outline"
-          className="w-full bg-transparent text-white border border-gray-600 hover:border-white hover:bg-black/20 rounded-full py-6 flex items-center justify-center space-x-2"
+          className="w-full bg-transparent text-white border border-gray-600 hover:border-white hover:bg-black/20 rounded-full py-6 flex items-center justify-center"
         >
-          <Image src="/google-icon.svg" alt="Google" width={20} height={20} />
-          <span>Continue with Google</span>
+          <div className="flex items-center space-x-2">
+            <Image src="/google-icon.svg" alt="Google" width={20} height={20} />
+            <span className="flex-1 text-center">Continue with Google</span>
+          </div>
         </Button>
 
         <Button
           variant="outline"
-          className="w-full bg-transparent text-white border border-gray-600 hover:border-white hover:bg-black/20 rounded-full py-6 flex items-center justify-center space-x-2"
+          className="w-full bg-transparent text-white border border-gray-600 hover:border-white hover:bg-black/20 rounded-full py-6 flex items-center justify-center"
         >
-          <Image src="/facebook-icon.svg" alt="Facebook" width={20} height={20} />
-          <span>Continue with Facebook</span>
+          <div className="flex items-center space-x-2">
+            <Image src="/facebook-icon.svg" alt="Facebook" width={20} height={20} />
+            <span className="flex-1 text-center">Continue with Facebook</span>
+          </div>
         </Button>
 
         <Button
           variant="outline"
-          className="w-full bg-transparent text-white border border-gray-600 hover:border-white hover:bg-black/20 rounded-full py-6 flex items-center justify-center space-x-2"
+          className="w-full bg-transparent text-white border border-gray-600 hover:border-white hover:bg-black/20 rounded-full py-6 flex items-center justify-center"
         >
-          <Image src="/apple-icon.svg" alt="Apple" width={20} height={20} />
-          <span>Continue with Apple</span>
+          <div className="flex items-center space-x-2">
+            <Image src="/apple-icon.svg" alt="Apple" width={40} height={40} />
+            <span className="flex-1 text-center">Continue with Apple</span>
+          </div>
         </Button>
       </div>
 

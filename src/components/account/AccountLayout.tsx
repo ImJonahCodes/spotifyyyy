@@ -28,13 +28,12 @@ export default function AccountLayout({
       <header className="bg-black p-4 flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <Link href="/">
-            <Image
-              src="/spotify-logo.svg"
-              alt="Spotify"
-              width={132}
-              height={40}
-              className="h-10 w-auto"
-            />
+          <img
+          src="/spotify.png"
+          alt="Spotify"
+          width={30}
+          height={30}
+        />
           </Link>
         </div>
         <div className="flex items-center space-x-4">
@@ -52,7 +51,7 @@ export default function AccountLayout({
 
       {/* Footer */}
       <footer className="bg-black py-6 px-8 text-center text-gray-400 text-sm">
-        <p>© 2025 Spotify Clone</p>
+        <p>© 2025 Spotify AB</p>
       </footer>
     </div>
   );
