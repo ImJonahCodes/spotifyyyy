@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 142 72% 50%;  /* Spotify Green */
+    --primary-foreground: 0 0% 0%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 142 72% 50%;  /* Spotify Green */
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 0 0% 7%;  /* Spotify Black */
+    --foreground: 0 0% 100%;
+    --card: 0 0% 10%;  /* Spotify Card */
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 142 72% 50%;  /* Spotify Green */
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 15%;  /* Spotify Secondary */
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 60%;  /* Spotify Muted Text */
+    --accent: 142 72% 50%;  /* Spotify Green */
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 20%;  /* Spotify Border */
+    --input: 0 0% 20%;
+    --ring: 142 72% 50%;  /* Spotify Green */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Spotify-specific styling */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold;
+  }
+
+  /* Button styles */
+  .spotify-primary-button {
+    @apply bg-[#1ED760] hover:bg-[#1FDF64] text-black font-bold py-3 px-8 rounded-full;
+  }
+
+  .spotify-secondary-button {
+    @apply bg-transparent text-white border border-gray-700 hover:border-white hover:bg-opacity-10 py-3 px-8 rounded-full;
+  }
+
+  /* Custom card styles */
+  .spotify-card {
+    @apply bg-[#181818] border-[#282828] rounded-md overflow-hidden;
+  }
+}
+
+/* Add a pseudo-Circular font */
+@layer base {
+  body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  }
+}
