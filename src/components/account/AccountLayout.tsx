@@ -51,7 +51,7 @@ export default function AccountLayout({
 
       {/* Footer */}
       <footer className="bg-black py-6 px-8 text-center text-gray-400 text-sm">
-        <p>© 2025 Spotify AB</p>
+        <p>©2025 Spotify AB</p>
       </footer>
     </div>
   );
